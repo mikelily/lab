@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>1 - 25</title>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap-button.css" rel="stylesheet">
+        <!--<link rel="stylesheet" href="css/stopwatch.css">-->
+        <link rel="stylesheet" href="css/jquery-ui.min.css">
+        <!--animate 動畫-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+
+        
+        <!--<link href="css/style_ok.css" rel="stylesheet">-->
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+        <!--截圖用-->
+        <script type="text/javascript" src="js/html2canvas.js"></script>
+        
+        <script>
+            
+            var oneTo25 = [];
+            // var oneTo25Random = [];
+            for (var i=0;i<25;i++){
+                if(i<9){
+                    oneTo25[i] = "0"+(i+1);
+                }else
+                    oneTo25[i] = i+1;
+            }
+            
+            $(document).ready(function () {
+                placeBtn();
+                // $( "#25NumBtnDiv" ).slideUp( "fast" );
+                $( "#25NumBtnDiv" ).removeClass('animated fadeInLeft');
+                $( "#25NumBtnDiv" ).addClass('animated fadeOutRight');
+                // $( "#container" ).attr("display","none");
+                //startTimer();
+            });
+            
+            $(".num25").each(function (key, obj) {
+                $(obj).data("num25", oneTo25[key]);
+            })
+            
+            function placeBtn(){
+                nextNum = 1;
+                $("#nextN").text(nextNum);
+                
+                var html = "";
+                var brNow = 0;
+                random25();
+                for (i = 0 ; i < 25 ; i++){
+                    if(brNow==5){
+                        html += "<br>";
+                        brNow =0;
+                    }
+                    html += '<button type="button" name="btn'+oneTo25[i]+'" id="btn'+
+                    // 'style="width:100px;height:40px;font-size:20px;"'+
+                    oneTo25[i]+'"class="btn-lg num25 btn-num" data-num25="btn'+oneTo25[i]+
+                    '" onclick="btnClick('+oneTo25[i]+')">'+oneTo25[i]+' </button>';
+                    brNow++;
+                }
+                $("#25NumBtnDiv").html(html);
+                
+            }
+        </script>
+    </head>
+    <body background="25-icon-bg2.png" id ="captureBody">
+        <center class="container-fluid">
+            <!--Next number Div-->
+            <div>
+                <font size="6">
+                    <text>Next number : </text>
+                </font>
+                <font size="7" color="red">
+                    <text id="nextN"></text>
+                </font>
+            </div>
+            
+            <!--25 button Div-->
+            <div id="25NumBtnDiv" class="container-fluid"
+                style="margin:10px;">
+            </div><br>
+            
+            <!--Timer Div-->
+            <div class="stopwatch container-fluid">
+                <div class="controls">
+                    <button id ="startBtn" class="start btn btn-primary" size="300px">Start</button>
+                    &nbsp&nbsp
+                    <button id ="pauseBtn" class="stop btn btn-success ">Pause</button>
+                    &nbsp&nbsp
+                    <button id ="resetBtn" class="reset btn btn-danger">Reset</button>
+                </div>
+                <div class="display">
+                    <font size="5">
+                        <span class="minutes">00</span>
+                        <span>分</span>
+                        <span class="seconds">00</span>
+                        <span>秒</span>
+                        <span class="centiseconds">00</span>
+                        <span>毫秒</span>
+                    </font>
+                </div>
+            </div>
+            
+            <div>
+                <a href="javascript:;" rel="external nofollow" class="btn" id="download">截图下载</a>
+                <a id="auto" style="display:none;" download></a>
+                <button id="captureBtn">Capture</button>
+            </div>
+            
+            
+            <script type="text/javascript" src="js/stopwatch.2.js"></script>
+            <script>
+            $("#startBtn").click(function(){
+                //placeBtn();
+                // $( "#25NumBtnDiv" ).slideDown( "slow" );
+                $( "#25NumBtnDiv" ).removeClass('animated fadeOutRight');
+                $( "#25NumBtnDiv" ).addClass('animated fadeInLeft');
+            });
+            $("#pauseBtn").click(function(){
+                //placeBtn();addClass('animated shake');
+                // $( "#25NumBtnDiv" ).slideUp( "slow" );
+                $( "#25NumBtnDiv" ).removeClass('animated fadeInLeft');
+                $( "#25NumBtnDiv" ).addClass('animated fadeOutRight');
+            });
+            $("#resetBtn").click(function(){
+                placeBtn();
+                // $( "#25NumBtnDiv" ).slideUp( "slow" );
+                // $( "#25NumBtnDiv" ).removeClass('animated fadeInLeft');
+                // $( "#25NumBtnDiv" ).addClass('animated fadeOutRight');
+            });
+                
+            
+            var nextNum = 1;
+            var rightNum = -1;
+
+            function btnClick(i){
+                //console.log(i);
+                if(nextNum == i){
+                    nextNum++;  //if nextNum == 26 -> End Game
+                    if (nextNum == 26){
+                        nextNum = 1;
+                        //endGame();
+                    }
+                    
+                    
+                    $("#nextN").text(nextNum);
+                    
+                    if(i<10){
+                        $("#btn0"+i).prop('disabled', true);
+                        $("#btn0"+i).removeClass("btn-num");
+                        $("#btn0"+i).addClass("btn-numC");
+                    }else{
+                        $("#btn"+i).prop('disabled', true);
+                        $("#btn"+i).removeClass("btn-num");
+                        $("#btn"+i).addClass("btn-numC");
+                    }
+                }
+                else{
+                    if(i<10){
+                        $("#btn0"+i).addClass('animated shake');
+                        setTimeout(function(){
+                            $("#btn0"+i).removeClass('animated shake');
+                        },500);
+                        
+                        // $("#btn0"+i).effect("shake", { direction: "left", times: 3, distance: 1}, 300);
+                    }else{
+                        $("#btn"+i).addClass('animated shake');
+                        setTimeout(function(){
+                            $("#btn"+i).removeClass('animated shake');
+                        },500);
+                        // $("#btn"+i).effect("shake", { direction: "left", times: 3, distance: 1}, 300);
+                        // $("#btn"+i).effect( "flash" );
+                    }
+                }
+                
+                
+                //console.log(i);
+            }
+            $(function(){ 
+            $("#captureBtn").click(function() {
+                // console.log($("#captureBody"));
+                html2canvas($("#captureBody")).then(function(canvas) {
+                    // console.log("html2canvas in");
+                    $("#download").attr('href', canvas.toDataURL("image/png"));
+                    // var $div = $("#download");
+                    // //$div.empty();
+                    // $("<img />", { src: canvas.toDataURL("image/png") }).appendTo($div);
+                });
+            });
+            });
+
+            function random25(){
+                for(var i=0;i<50;i++){  //打亂50次
+                    var twoNum = getRandomArray(0,24,2);
+                    var j = twoNum[0];
+                    var k = twoNum[1];
+                    var temp = "";
+                    temp = oneTo25[j];
+                    oneTo25[j] = oneTo25[k];
+                    oneTo25[k] = temp;
+                    //console.log("第"+(i+1)+"次：change "+j+" , "+k);
+                    
+                }
+            }
+            
+            function getRandom(minNum, maxNum) {	//取得 minNum(最小值) ~ maxNum(最大值) 之間的亂數
+            	return Math.floor( Math.random() * (maxNum - minNum + 1) ) + minNum;
+            }
+            
+            function getRandomArray(minNum, maxNum, n) {	//隨機產生不重覆的n個數字
+            	var rdmArray = [n];		//儲存產生的陣列
+             
+            	for(var i=0; i<n; i++) {
+            		var rdm = 0;		//暫存的亂數
+             
+            		do {
+            			var exist = false;			//此亂數是否已存在
+            			rdm = getRandom(minNum, maxNum);	//取得亂數
+             
+            			//檢查亂數是否存在於陣列中，若存在則繼續回圈
+            			if(rdmArray.indexOf(rdm) != -1) exist = true;
+             
+            		} while (exist);	//產生沒出現過的亂數時離開迴圈
+             
+            		rdmArray[i] = rdm;
+            	}
+            	return rdmArray;
+            }
+            </script>
+        </center>
+    </body>
+</html>

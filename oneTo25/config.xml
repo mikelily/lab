@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<widget 
+    xmlns="http://www.w3.org/ns/widgets" 
+    xmlns:gap="http://phonegap.com/ns/1.0" 
+    id="com.YourDomain.YourAppName" 
+    versionCode="10" 
+    version="1.0.0">
+
+    <name>Click 1 to 25 </name>
+
+    <author email="mikelily@email.com">
+        MikeLily
+    </author>
+    
+    <preference name="fullscreen" value="true" />
+    
+    <icon src="25-icon.png" />
+    <icon src="res/icon/android/25-icon-36.png"   gap:platform="android"    gap:qualifier="ldpi" />
+    <icon src="res/icon/android/25-icon-48.png"   gap:platform="android"    gap:qualifier="mdpi" />
+    <icon src="res/icon/android/25-icon-72.png"   gap:platform="android"    gap:qualifier="hdpi" />
+    <icon src="res/icon/android/25-icon-96.png"  gap:platform="android"    gap:qualifier="xhdpi" />
+    
+    <gap:plugin source="npm" name="cordova-plugin-whitelist" />
+    <gap:plugin source="npm" name="cordova-plugin-device" />
+    <gap:plugin source="npm" name="cordova-plugin-device-motion" />
+    <access origin="*" />
+    <allow-intent href="*" />
+    <allow-navigation href="*" />
+
+
+</widget>

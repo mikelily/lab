@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>1 - 25</title>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap-button.css" rel="stylesheet">
+        
+        <link href="css/style_ok.css" rel="stylesheet">
+        <script type="text/javascript" src="js/jquery.js"></script>
+    </head>
+    <body>
+        <center>
+            <div> Timer 00:00</div><br>
+            <div id="container"></div><br>
+            <div>
+                <button onclick="btnTest()">test</button>
+            </div>
+            <script>
+            var oneTo25 = [];
+            // var oneTo25Random = [];
+            for (var i=0;i<25;i++){
+                if(i<9){
+                    oneTo25[i] = "0"+(i+1);
+                }else
+                    oneTo25[i] = i+1;
+            }
+            
+            $(document).ready(function () {
+                placeBtn();
+            });
+            
+            $(".num25").each(function (key, obj) {
+                $(obj).data("num25", oneTo25[key]);
+            })
+            
+            function placeBtn(){
+                var html = "";
+                var brNow = 0;
+                random25();
+                for (i = 0 ; i < 25 ; i++){
+                    if(brNow==5){
+                        html += "<br>";
+                        brNow =0;
+                    }
+                    html += '<button type="button" name="btn'+oneTo25[i]+'" id="btn'+
+                    oneTo25[i]+'"class="num25 btn-num" data-num25="btn'+oneTo25[i]+
+                    '" >'+oneTo25[i]+' </button>';
+                    brNow++;
+                }
+                $("#container").html(html);
+                
+            }
+            
+            function btnTest(){
+                // var k = 1;
+                // $("#btn0"+k).fadeOut();
+                placeBtn();
+                //console.log(getRandomArray(0,24,2));
+            }
+            
+            //沒反應
+            $(".num25").click(function (){
+                alert("1");
+                var k=$(this).data("num25");
+                console.log(k);
+            });
+            
+            //this 抓無
+            function btnClick(){
+                var k=$(this).prop("id");
+                console.log(k);
+            }
+            
+            $("#btn01").click(function(){
+                console.log("01");
+            });
+            
+            function random25(){
+                for(var i=0;i<50;i++){  //打亂50次
+                    var twoNum = getRandomArray(0,24,2);
+                    var j = twoNum[0];
+                    var k = twoNum[1];
+                    var temp = "";
+                    temp = oneTo25[j];
+                    oneTo25[j] = oneTo25[k];
+                    oneTo25[k] = temp;
+                    //console.log("第"+(i+1)+"次：change "+j+" , "+k);
+                    
+                }
+            }
+            
+            function getRandom(minNum, maxNum) {	//取得 minNum(最小值) ~ maxNum(最大值) 之間的亂數
+            	return Math.floor( Math.random() * (maxNum - minNum + 1) ) + minNum;
+            }
+            
+            function getRandomArray(minNum, maxNum, n) {	//隨機產生不重覆的n個數字
+            	var rdmArray = [n];		//儲存產生的陣列
+             
+            	for(var i=0; i<n; i++) {
+            		var rdm = 0;		//暫存的亂數
+             
+            		do {
+            			var exist = false;			//此亂數是否已存在
+            			rdm = getRandom(minNum, maxNum);	//取得亂數
+             
+            			//檢查亂數是否存在於陣列中，若存在則繼續回圈
+            			if(rdmArray.indexOf(rdm) != -1) exist = true;
+             
+            		} while (exist);	//產生沒出現過的亂數時離開迴圈
+             
+            		rdmArray[i] = rdm;
+            	}
+            	return rdmArray;
+            }
+            </script>
+        </center>
+    </body>
+</html>

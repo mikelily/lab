@@ -1,0 +1,94 @@
+.btn-num { 
+  color: #ffffff; 
+  background-color: #611BBD; 
+  border-color: #130269; 
+  /*size: 20;*/
+} 
+ 
+.btn-num:hover, 
+.btn-num:focus, 
+.btn-num:active, 
+.btn-num.active, 
+.open .dropdown-toggle.btn-num { 
+  color: #ffffff; 
+  background-color: #49247A; 
+  border-color: #130269; 
+} 
+ 
+.btn-num:active, 
+.btn-num.active, 
+.open .dropdown-toggle.btn-num { 
+  background-image: none; 
+} 
+ 
+.btn-num.disabled, 
+.btn-num[disabled], 
+fieldset[disabled] .btn-num, 
+.btn-num.disabled:hover, 
+.btn-num[disabled]:hover, 
+fieldset[disabled] .btn-num:hover, 
+.btn-num.disabled:focus, 
+.btn-num[disabled]:focus, 
+fieldset[disabled] .btn-num:focus, 
+.btn-num.disabled:active, 
+.btn-num[disabled]:active, 
+fieldset[disabled] .btn-num:active, 
+.btn-num.disabled.active, 
+.btn-num[disabled].active, 
+fieldset[disabled] .btn-num.active { 
+  background-color: #611BBD; 
+  border-color: #130269; 
+} 
+ 
+.btn-num .badge { 
+  color: #611BBD; 
+  background-color: #ffffff; 
+}
+
+/*=============================*/
+
+.btn-numC { 
+  color: #ffffff; 
+  background-color: #E8E1F2; 
+  border-color: #F3F2FA; 
+} 
+ 
+.btn-numC:hover, 
+.btn-numC:focus, 
+.btn-numC:active, 
+.btn-numC.active, 
+.open .dropdown-toggle.btn-numC { 
+  color: #ffffff; 
+  background-color: #F0EAF7; 
+  border-color: #F3F2FA; 
+} 
+ 
+.btn-numC:active, 
+.btn-numC.active, 
+.open .dropdown-toggle.btn-numC { 
+  background-image: none; 
+} 
+ 
+.btn-numC.disabled, 
+.btn-numC[disabled], 
+fieldset[disabled] .btn-numC, 
+.btn-numC.disabled:hover, 
+.btn-numC[disabled]:hover, 
+fieldset[disabled] .btn-numC:hover, 
+.btn-numC.disabled:focus, 
+.btn-numC[disabled]:focus, 
+fieldset[disabled] .btn-numC:focus, 
+.btn-numC.disabled:active, 
+.btn-numC[disabled]:active, 
+fieldset[disabled] .btn-numC:active, 
+.btn-numC.disabled.active, 
+.btn-numC[disabled].active, 
+fieldset[disabled] .btn-numC.active { 
+  background-color: #E8E1F2; 
+  border-color: #F3F2FA; 
+} 
+ 
+.btn-numC .badge { 
+  color: #E8E1F2; 
+  background-color: #ffffff; 
+}

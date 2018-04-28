@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>1 - 25</title>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap-button.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/stopwatch.css">
+        
+        <link href="css/style_ok.css" rel="stylesheet">
+        <script type="text/javascript" src="js/jquery.js"></script>
+        
+        <script>
+            
+            var oneTo25 = [];
+            // var oneTo25Random = [];
+            for (var i=0;i<25;i++){
+                if(i<9){
+                    oneTo25[i] = "0"+(i+1);
+                }else
+                    oneTo25[i] = i+1;
+            }
+            
+            $(document).ready(function () {
+                placeBtn();
+                $( "#container" ).slideUp( "fast" );
+                // $( "#container" ).attr("display","none");
+                //startTimer();
+            });
+            
+            $(".num25").each(function (key, obj) {
+                $(obj).data("num25", oneTo25[key]);
+            })
+            
+            function placeBtn(){
+                nextNum = 1;
+                $("#nextN").text(nextNum);
+                
+                var html = "";
+                var brNow = 0;
+                random25();
+                for (i = 0 ; i < 25 ; i++){
+                    if(brNow==5){
+                        html += "<br>";
+                        brNow =0;
+                    }
+                    html += '<button type="button" name="btn'+oneTo25[i]+'" id="btn'+
+                    oneTo25[i]+'"class="num25 btn-num" data-num25="btn'+oneTo25[i]+
+                    '" onclick="btnClick('+oneTo25[i]+')">'+oneTo25[i]+' </button>';
+                    brNow++;
+                }
+                $("#container").html(html);
+                
+            }
+        </script>
+    </head>
+    <body>
+        <center>
+            <!--<div> -->
+            <!--    <text>Timer : </text>-->
+            <!--    <text id="timerS"></text><br>-->
+            <!--</div>-->
+            
+            <!--<canvas id="canvas" width=300 height=300></canvas>-->
+            <div>
+                <text>Next number : </text>
+                <text id="nextN"></text>
+            </div>
+            <br>
+            <div id="container"></div><br>
+            <!--<div>-->
+            <!--    <button onclick="btnTest()">test</button>-->
+            <!--</div>-->
+            <div class="stopwatch">
+                <div class="controls">
+                    <button id ="startBtn" class="start">Start</button>
+                    <button id ="pauseBtn" class="stop">Pause</button>
+                    <button id ="resetBtn" class="reset">Reset</button>
+                </div>
+                <div class="display">
+                    <span class="minutes">00</span>
+                    <span>分</span>
+                    <span class="seconds">00</span>
+                    <span>秒</span>
+                    <span class="centiseconds">00</span>
+                    <span>毫秒</span>
+                </div>
+            </div>
+            <script type="text/javascript" src="js/stopwatch.2.js"></script>
+            <script>
+            $("#startBtn").click(function(){
+                //placeBtn();
+                $( "#container" ).slideDown( "slow" );
+            });
+            $("#pauseBtn").click(function(){
+                //placeBtn();
+                $( "#container" ).slideUp( "slow" );
+            });
+            $("#resetBtn").click(function(){
+                placeBtn();
+                $( "#container" ).slideUp( "slow" );
+            });
+                
+            
+            var nextNum = 1;
+            var rightNum = -1;
+
+            function btnClick(i){
+                console.log(i);
+                if(nextNum == i){
+                    nextNum++;  //if nextNum == 26 -> End Game
+                    if (nextNum == 26){
+                        nextNum = 1;
+                        //endGame();
+                    }
+                    
+                    
+                    $("#nextN").text(nextNum);
+                    
+                    if(i<10){
+                        $("#btn0"+i).prop('disabled', true);
+                        $("#btn0"+i).removeClass("btn-num");
+                        $("#btn0"+i).addClass("btn-numC");
+                    }else{
+                        $("#btn"+i).prop('disabled', true);
+                        $("#btn"+i).removeClass("btn-num");
+                        $("#btn"+i).addClass("btn-numC");
+                    }
+                }
+                
+                
+                //console.log(i);
+            }
+            
+            function endGame(){
+                //stopTimer();
+            }
+
+            function random25(){
+                for(var i=0;i<50;i++){  //打亂50次
+                    var twoNum = getRandomArray(0,24,2);
+                    var j = twoNum[0];
+                    var k = twoNum[1];
+                    var temp = "";
+                    temp = oneTo25[j];
+                    oneTo25[j] = oneTo25[k];
+                    oneTo25[k] = temp;
+                    //console.log("第"+(i+1)+"次：change "+j+" , "+k);
+                    
+                }
+            }
+            
+            function getRandom(minNum, maxNum) {	//取得 minNum(最小值) ~ maxNum(最大值) 之間的亂數
+            	return Math.floor( Math.random() * (maxNum - minNum + 1) ) + minNum;
+            }
+            
+            function getRandomArray(minNum, maxNum, n) {	//隨機產生不重覆的n個數字
+            	var rdmArray = [n];		//儲存產生的陣列
+             
+            	for(var i=0; i<n; i++) {
+            		var rdm = 0;		//暫存的亂數
+             
+            		do {
+            			var exist = false;			//此亂數是否已存在
+            			rdm = getRandom(minNum, maxNum);	//取得亂數
+             
+            			//檢查亂數是否存在於陣列中，若存在則繼續回圈
+            			if(rdmArray.indexOf(rdm) != -1) exist = true;
+             
+            		} while (exist);	//產生沒出現過的亂數時離開迴圈
+             
+            		rdmArray[i] = rdm;
+            	}
+            	return rdmArray;
+            }
+            </script>
+        </center>
+    </body>
+</html>
